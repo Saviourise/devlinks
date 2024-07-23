@@ -32,6 +32,7 @@ const config: Config = {
         secondary: "#9333EA",
       },
       fontFamily: {
+        default: ['"Instrument Sans"', "sans-serif"],
         sans: ['"Instrument Sans"', "sans-serif"],
       },
       boxShadow: {

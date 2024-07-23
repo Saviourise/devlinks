@@ -65,7 +65,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="font-default w-full min:h-full flex sm:items-center items-start justify-center sm:bg-white-border bg-white-default p-[32px]">
+    <div className="font-default w-full min-h-full flex sm:items-center items-start justify-center sm:bg-white-border bg-white-default p-[32px]">
       <div className="flex flex-col sm:gap-[50px] gap-[64px] items-center justify-center sm:w-[500px] w-full">
         <div className="flex flex-row sm:justify-center justify-start items-center gap-2 w-full">
           <Image src="/devlinks_logo.svg" alt="logo" width={34} height={34} />
