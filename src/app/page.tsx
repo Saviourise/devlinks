@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import React, { useLayoutEffect } from "react";
 
-const page = () => {
+const App = () => {
   const router = useRouter();
   useLayoutEffect(() => {
     router.replace("/signin");
@@ -19,4 +19,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default App;

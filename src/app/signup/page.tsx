@@ -72,7 +72,7 @@ const Signup = () => {
             Create Account
           </h1>
           <p className="text-[16px] text-grey-medium">
-            Let's get you started sharing your links!
+            Let&apos;s get you started sharing your links!
           </p>
 
           <form

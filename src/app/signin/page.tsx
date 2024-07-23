@@ -177,7 +177,7 @@ const Signin = () => {
 
             <div className="flex sm:flex-row flex-col items-center justify-center gap-1">
               <p className="font-[16px] text-[#888888]">
-                Don't have an account?
+                Don&apos;t have an account?
               </p>
               <Link href="/signup" className="text-primary-default font-[16px]">
                 Create Account
