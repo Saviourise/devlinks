@@ -3,7 +3,7 @@ import React from "react";
 
 const Links = () => {
   return (
-    <div>
+    <div className="p-[16px]">
       <DashboardHeader type={"links"} />
     </div>
   );

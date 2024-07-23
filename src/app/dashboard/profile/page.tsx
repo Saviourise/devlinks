@@ -3,7 +3,7 @@ import React from "react";
 
 const Profile = () => {
   return (
-    <div>
+    <div className="p-[16px]">
       <DashboardHeader type={"profile"} />
     </div>
   );
