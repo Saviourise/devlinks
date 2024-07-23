@@ -35,6 +35,7 @@ const Links = () => {
               links.map((link: LinkProps, index: number) => {
                 return (
                   <button
+                    key={index}
                     className={`${
                       link.name === "github"
                         ? "bg-black"
@@ -113,12 +114,12 @@ const Links = () => {
             <div className="w-full h-[450px] bg-white-border rounded-[12px] p-[40px] flex flex-col items-center justify-center gap-[20px]">
               <Image alt="" src={"/empty-links.svg"} height={160} width={250} />
               <h1 className="text-[32px] font-[700] text-grey-dark mb-1">
-                Let's get you started
+                Let&apos;s get you started
               </h1>
               <p className="text-grey-medium text-[16px] text-center">
                 Use the “Add new link” button to get started. Once you have more
-                than one link, you can reorder and edit them. We're here to help
-                you share your profiles with everyone!
+                than one link, you can reorder and edit them. We&apos;re here to
+                help you share your profiles with everyone!
               </p>
             </div>
           </div>
