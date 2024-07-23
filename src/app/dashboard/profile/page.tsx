@@ -1,7 +1,12 @@
+import DashboardHeader from "@/components/DashboardHeader";
 import React from "react";
 
 const Profile = () => {
-  return <div>Profile</div>;
+  return (
+    <div>
+      <DashboardHeader type={"profile"} />
+    </div>
+  );
 };
 
 export default Profile;
