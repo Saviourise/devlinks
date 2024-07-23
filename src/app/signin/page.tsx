@@ -39,9 +39,13 @@ const Signin = () => {
     signInWithEmailAndPassword(auth, details.email, details.password)
       .then((userCredential) => {
         // console.log(userCredential.user);
-        toast.success("Successfully Logged In, redirecting...");
+        toast.success("Successfully Logged In, redirecting...", {
+          duration: 2000,
+        });
         sessionStorage.setItem("user", JSON.stringify(userCredential.user));
-        router.push("/dashboard/links");
+        setTimeout(() => {
+          router.push("/dashboard/links");
+        }, 2300);
       })
       .catch((error) => {
         // console.log(error);

@@ -44,8 +44,13 @@ const Signup = () => {
     createUserWithEmailAndPassword(auth, details.email, details.password)
       .then((userCredential) => {
         // console.log(userCredential.user);
-        toast.success("Account Created Successfully, redirecting...");
-        router.push("/signin");
+        toast.success("Account Created Successfully, redirecting...", {
+          duration: 2000,
+        });
+
+        setTimeout(() => {
+          router.push("/signin");
+        }, 2300);
       })
       .catch((error) => {
         // console.log(error);
