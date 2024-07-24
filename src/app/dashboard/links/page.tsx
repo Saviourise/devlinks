@@ -29,16 +29,16 @@ const Links = () => {
   const addLink = () => {
     const link = { ...providedLinks[0] };
 
-    sessionStorage.setItem("links", JSON.stringify([...links, link]));
+    window.sessionStorage.setItem("links", JSON.stringify([...links, link]));
     setLinks((prev) => [...prev, link]);
   };
 
   useEffect(() => {
-    const links = JSON.parse(sessionStorage.getItem("links") || "[]");
+    const links = JSON.parse(window.sessionStorage.getItem("links") || "[]");
     setLinks(() => links);
 
     const listenStorageChange = () => {
-      const links = JSON.parse(sessionStorage.getItem("links") || "[]");
+      const links = JSON.parse(window.sessionStorage.getItem("links") || "[]");
       setLinks(() => links);
     };
     window.addEventListener("storage", listenStorageChange);
@@ -47,7 +47,7 @@ const Links = () => {
 
   useEffect(() => {
     setFetchingLinks(true);
-    const user = JSON.parse(sessionStorage.getItem("user") as string);
+    const user = JSON.parse(window.sessionStorage.getItem("user") as string);
     if (!user) {
       router.replace("/signin");
     }
@@ -61,7 +61,9 @@ const Links = () => {
 
     // check if url is valid
     if (!url) {
-      const links = JSON.parse(sessionStorage.getItem("links") as string);
+      const links = JSON.parse(
+        window.sessionStorage.getItem("links") as string
+      );
       const link = links.find(
         (link: LinkProps) => link.name === selectedLink.name
       );
@@ -69,7 +71,7 @@ const Links = () => {
 
       links[index] = link;
       console.log(links);
-      sessionStorage.setItem("links", JSON.stringify(links));
+      window.sessionStorage.setItem("links", JSON.stringify(links));
       window.dispatchEvent(new Event("storage"));
 
       return "Can't be empty";
@@ -82,14 +84,16 @@ const Links = () => {
     ) {
       return;
     } else {
-      const links = JSON.parse(sessionStorage.getItem("links") as string);
+      const links = JSON.parse(
+        window.sessionStorage.getItem("links") as string
+      );
       const link = links.find(
         (link: LinkProps) => link.name === selectedLink.name
       );
       link.error = "Please check the URL";
 
       links[index] = link;
-      sessionStorage.setItem("links", JSON.stringify(links));
+      window.sessionStorage.setItem("links", JSON.stringify(links));
       window.dispatchEvent(new Event("storage"));
 
       return "Please check the URL";
@@ -104,10 +108,12 @@ const Links = () => {
       }
     }
 
-    const userid = JSON.parse(sessionStorage.getItem("user") as string).uid;
+    const userid = JSON.parse(
+      window.sessionStorage.getItem("user") as string
+    ).uid;
     if (!userid) {
-      sessionStorage.removeItem("links");
-      sessionStorage.removeItem("user");
+      window.sessionStorage.removeItem("links");
+      window.sessionStorage.removeItem("user");
       return router.replace("/signin");
     }
 
@@ -133,7 +139,7 @@ const Links = () => {
     if (docSnap.exists()) {
       const data = docSnap.data();
       data.links.length &&
-        sessionStorage.setItem("links", JSON.stringify(data.links));
+        window.sessionStorage.setItem("links", JSON.stringify(data.links));
       window.dispatchEvent(new Event("storage"));
     }
 

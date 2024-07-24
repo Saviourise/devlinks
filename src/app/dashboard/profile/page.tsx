@@ -37,13 +37,13 @@ const Profile = () => {
     email: "",
   });
 
-  const user = JSON.parse(sessionStorage.getItem("user") as string);
+  const user = JSON.parse(window.sessionStorage.getItem("user") as string);
 
   const router = useRouter();
 
   useEffect(() => {
     setFetchingLinks(true);
-    const user = JSON.parse(sessionStorage.getItem("user") as string);
+    const user = JSON.parse(window.sessionStorage.getItem("user") as string);
     if (!user) {
       router.replace("/signin");
     }
@@ -112,8 +112,8 @@ const Profile = () => {
 
     if (!user) {
       router.replace("/signin");
-      sessionStorage.removeItem("user");
-      sessionStorage.removeItem("links");
+      window.sessionStorage.removeItem("user");
+      window.sessionStorage.removeItem("links");
       return;
     }
 
