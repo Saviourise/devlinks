@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && /* /index.html 200",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "export": "next export"
