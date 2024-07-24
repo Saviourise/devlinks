@@ -74,7 +74,7 @@ const Links = () => {
       link.error = "Can't be empty";
 
       links[index] = link;
-      console.log(links);
+      // console.log(links);
       sessionStorage.setItem("links", JSON.stringify(links));
       dispatchEvent(new Event("storage"));
 

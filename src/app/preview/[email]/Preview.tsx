@@ -18,7 +18,7 @@ import { Link as LinkIco } from "lucide-react";
 
 const Preview = ({ params }: { params: { email: string } }) => {
   const { email } = params;
-  console.log(decodeURIComponent(email));
+  // console.log(decodeURIComponent(email));
 
   const [fetchingLinks, setFetchingLinks] = useState(true);
   const [profile, setProfile] = useState<any>(null);

@@ -125,7 +125,7 @@ const LinkComponent = ({ idx, saving }: Props) => {
                       );
                       setSelectedLink(link as LinkProps);
                       setDropdownOpen(false);
-                      console.log(link, idx);
+                      // console.log(link, idx);
 
                       const savedLinks = JSON.parse(
                         sessionStorage.getItem("links") as string
