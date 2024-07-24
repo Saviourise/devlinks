@@ -55,7 +55,7 @@ const Preview = ({ params }: { params: { email: string } }) => {
           {user && user.uid === profile?.userid ? (
             <Link
               href="/dashboard/profile"
-              className="hover:bg-primary-disabled transition-all duration-300 bg-white-default border-[1px] rounded-[8px] border-primary-default text-primary-default px-[27px] py-[11px] leading-[24px] sm:text-[16px] text-[12px] font-[600]"
+              className="hover:bg-primary-disabled transition-all duration-300 sm:w-[170px] w-[50%] flex items-center justify-center bg-white-default border-[1px] rounded-[8px] border-primary-default text-primary-default px-[27px] py-[11px] leading-[24px] sm:text-[16px] text-[12px] font-[600]"
             >
               Back to Editor
             </Link>
@@ -73,7 +73,7 @@ const Preview = ({ params }: { params: { email: string } }) => {
                 </p>
               );
             }}
-            className="bg-primary-default hover:bg-primary-hover transition-all duration-300 rounded-[8px] text-white-default px-[27px] py-[11px] leading-[24px] sm:text-[16px] text-[12px] font-[600]"
+            className="bg-primary-default hover:bg-primary-hover sm:w-[150px] w-[50%] flex items-center justify-center transition-all duration-300 rounded-[8px] text-white-default px-[27px] py-[11px] leading-[24px] sm:text-[16px] text-[12px] font-[600]"
           >
             Share Link
           </button>
