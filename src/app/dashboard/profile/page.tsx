@@ -37,11 +37,7 @@ const Profile = () => {
     email: "",
   });
 
-  let user: any = null;
-
-  useEffect(() => {
-    user = JSON.parse(sessionStorage.getItem("user") as string);
-  }, []);
+  const [user] = useState(JSON.parse(sessionStorage.getItem("user") as string));
 
   const router = useRouter();
 
