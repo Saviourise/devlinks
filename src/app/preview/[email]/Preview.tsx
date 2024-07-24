@@ -39,6 +39,8 @@ const Preview = ({ params }: { params: { email: string } }) => {
 
   useEffect(() => {
     getProfile();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [user, setUser] = useState<any>();
@@ -50,7 +52,7 @@ const Preview = ({ params }: { params: { email: string } }) => {
     <div className="h-full w-full bg-white-default min-h-[100vh]">
       <div className="w-full sm:h-[357px] h-full pb-10 sm:bg-primary-default bg-white-default rounded-bl-[32px] rounded-br-[32px] p-[24px]">
         <div className="bg-white-default flex flex-row justify-between items-center p-[16px] rounded-[12px] gap-[8px]">
-          {user && user.uid === profile?.uid ? (
+          {user && user.uid === profile?.userid ? (
             <Link
               href="/dashboard/profile"
               className="hover:bg-primary-disabled transition-all duration-300 bg-white-default border-[1px] rounded-[8px] border-primary-default text-primary-default px-[27px] py-[11px] leading-[24px] sm:text-[16px] text-[12px] font-[600]"

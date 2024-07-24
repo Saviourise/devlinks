@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -33,6 +33,10 @@ const Signup = () => {
   });
 
   const auth = getAuth(app);
+
+  useEffect(() => {
+    sessionStorage.clear();
+  }, []);
 
   const submitSignupDetails = async (details: {
     email: string;

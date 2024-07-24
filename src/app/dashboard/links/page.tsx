@@ -4,7 +4,13 @@ import DashboardHeader from "@/components/DashboardHeader";
 import LinkComponent from "@/components/LinkComponent";
 import { providedLinks } from "@/data/Links";
 import app from "@/utils/firebase";
-import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  getFirestore,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { ArrowRight, Plus } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -111,6 +117,9 @@ const Links = () => {
     }
 
     const userid = JSON.parse(sessionStorage.getItem("user") as string).uid;
+    const useremail = JSON.parse(
+      sessionStorage.getItem("user") as string
+    ).email;
     if (!userid) {
       sessionStorage.removeItem("links");
       sessionStorage.removeItem("user");
@@ -127,6 +136,7 @@ const Links = () => {
     const parsedData = {
       userid,
       links: linksToStore,
+      email: useremail,
     };
     saveData(parsedData);
   };
@@ -148,12 +158,25 @@ const Links = () => {
 
   const saveData = async (data: {
     userid: string;
+    email: string;
     links: { name: string; link: string }[];
   }) => {
     setSaving(true);
     const db = getFirestore(app);
+    console.log(data);
     const docRef = doc(db, "links", data.userid);
-    await setDoc(docRef, data);
+
+    // check if user exists
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      await updateDoc(docRef, {
+        links: data.links,
+      });
+    } else {
+      await setDoc(docRef, data);
+    }
+
     setSaving(false);
     toast.success(
       <p className="flex flex-row gap-2 items-center justify-center">
