@@ -42,10 +42,7 @@ const Signin = () => {
         toast.success("Successfully Logged In, redirecting...", {
           duration: 2000,
         });
-        window.sessionStorage.setItem(
-          "user",
-          JSON.stringify(userCredential.user)
-        );
+        sessionStorage.setItem("user", JSON.stringify(userCredential.user));
         setTimeout(() => {
           router.push("/dashboard/links");
         }, 2300);

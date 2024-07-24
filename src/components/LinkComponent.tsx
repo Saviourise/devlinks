@@ -11,7 +11,7 @@ type Props = {
 const LinkComponent = ({ idx, saving }: Props) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [selectedLink, setSelectedLink] = useState<LinkProps>(
-    JSON.parse(window.sessionStorage.getItem("links") as string)[idx]
+    JSON.parse(sessionStorage.getItem("links") as string)[idx]
   );
   const [url, setUrl] = useState(selectedLink.link);
 
@@ -24,28 +24,26 @@ const LinkComponent = ({ idx, saving }: Props) => {
   useEffect(() => {
     const link = selectedLink;
     link.link = url;
-    const savedLinks = JSON.parse(
-      window.sessionStorage.getItem("links") as string
-    );
+    const savedLinks = JSON.parse(sessionStorage.getItem("links") as string);
 
     savedLinks[idx] = link as LinkProps;
-    window.sessionStorage.setItem("links", JSON.stringify(savedLinks));
-    window.dispatchEvent(new Event("storage"));
+    sessionStorage.setItem("links", JSON.stringify(savedLinks));
+    dispatchEvent(new Event("storage"));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url]);
 
   useEffect(() => {
-    const links = JSON.parse(window.sessionStorage.getItem("links") || "[]");
+    const links = JSON.parse(sessionStorage.getItem("links") || "[]");
     setSelectedLink(links[idx]);
 
     const listenStorageChange = () => {
-      const links = JSON.parse(window.sessionStorage.getItem("links") || "[]");
+      const links = JSON.parse(sessionStorage.getItem("links") || "[]");
       // console.log(links);
       setSelectedLink(links[idx]);
     };
-    window.addEventListener("storage", listenStorageChange);
-    return () => window.removeEventListener("storage", listenStorageChange);
+    addEventListener("storage", listenStorageChange);
+    return () => removeEventListener("storage", listenStorageChange);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -70,11 +68,11 @@ const LinkComponent = ({ idx, saving }: Props) => {
           className="text-[16px] text-grey-medium"
           onClick={() => {
             const savedLinks = JSON.parse(
-              window.sessionStorage.getItem("links") as string
+              sessionStorage.getItem("links") as string
             );
             savedLinks.splice(idx, 1);
-            window.sessionStorage.setItem("links", JSON.stringify(savedLinks));
-            window.dispatchEvent(new Event("storage"));
+            sessionStorage.setItem("links", JSON.stringify(savedLinks));
+            dispatchEvent(new Event("storage"));
           }}
         >
           Remove
@@ -130,14 +128,14 @@ const LinkComponent = ({ idx, saving }: Props) => {
                       console.log(link, idx);
 
                       const savedLinks = JSON.parse(
-                        window.sessionStorage.getItem("links") as string
+                        sessionStorage.getItem("links") as string
                       );
                       savedLinks[idx] = link as LinkProps;
-                      window.sessionStorage.setItem(
+                      sessionStorage.setItem(
                         "links",
                         JSON.stringify(savedLinks)
                       );
-                      window.dispatchEvent(new Event("storage"));
+                      dispatchEvent(new Event("storage"));
                     }}
                     value={index}
                     className="text-grey-dark py-[12px] px-[16px] w-full text-start text-[16px] flex flex-row gap-[12px] items-center transition-all duration-300 hover:text-primary-default"
