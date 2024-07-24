@@ -14,7 +14,7 @@ import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
 const Profile = () => {
   const [links, setLinks] = useState<LinkProps[]>([]);
-  const [fetchingLinks, setFetchingLinks] = useState(false);
+  const [fetchingLinks, setFetchingLinks] = useState(true);
   const [saving, setSaving] = useState(false);
   const [file, setFile] = useState<File | string>("");
   const [details, setDetails] = useState<{
@@ -49,7 +49,7 @@ const Profile = () => {
     setFetchingLinks(true);
     const user = JSON.parse(sessionStorage.getItem("user") as string);
     if (!user) {
-      router.replace("/signin");
+      return router.replace("/signin");
     }
 
     getFromDb(user.uid);
@@ -139,7 +139,23 @@ const Profile = () => {
         await updateDoc(docRef, {
           profilePicture: downloadUrl,
         });
-        toast.success("Profile picture uploaded successfully");
+        toast.success(
+          <p className="flex flex-row gap-2 items-center justify-center">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M14.25 0.500006H12.6875C12.6046 0.500006 12.5251 0.53293 12.4665 0.591536C12.4079 0.650141 12.375 0.729626 12.375 0.812506V4.25001C12.375 4.58153 12.2433 4.89947 12.0089 5.13389C11.7745 5.36831 11.4565 5.50001 11.125 5.50001H4.8961C4.73454 5.50258 4.57801 5.44378 4.45811 5.33547C4.3382 5.22716 4.26383 5.0774 4.25001 4.91641C4.24433 4.83092 4.25629 4.74518 4.28515 4.6645C4.31401 4.58383 4.35914 4.50995 4.41776 4.44745C4.47637 4.38496 4.5472 4.33518 4.62586 4.30121C4.70452 4.26725 4.78933 4.24982 4.87501 4.25001H10.8125C10.8954 4.25001 10.9749 4.21708 11.0335 4.15848C11.0921 4.09987 11.125 4.02039 11.125 3.93751V0.812506C11.125 0.729626 11.0921 0.650141 11.0335 0.591536C10.9749 0.53293 10.8954 0.500006 10.8125 0.500006H5.1336C4.96939 0.499482 4.80671 0.531604 4.65502 0.594506C4.50333 0.657407 4.36566 0.749834 4.25001 0.866412L0.866412 4.25001C0.749834 4.36566 0.657407 4.50333 0.594506 4.65502C0.531604 4.80671 0.499482 4.96939 0.500006 5.1336V14.25C0.500006 14.5815 0.631702 14.8995 0.866123 15.1339C1.10054 15.3683 1.41849 15.5 1.75001 15.5H14.25C14.5815 15.5 14.8995 15.3683 15.1339 15.1339C15.3683 14.8995 15.5 14.5815 15.5 14.25V1.75001C15.5 1.41849 15.3683 1.10054 15.1339 0.866123C14.8995 0.631702 14.5815 0.500006 14.25 0.500006ZM8.00001 12.375C7.50555 12.375 7.0222 12.2284 6.61108 11.9537C6.19996 11.679 5.87953 11.2885 5.69031 10.8317C5.50109 10.3749 5.45158 9.87223 5.54804 9.38728C5.64451 8.90233 5.88261 8.45687 6.23224 8.10724C6.58187 7.75761 7.02733 7.51951 7.51228 7.42304C7.99723 7.32658 8.4999 7.37609 8.95671 7.56531C9.41353 7.75453 9.80398 8.07496 10.0787 8.48608C10.3534 8.8972 10.5 9.38055 10.5 9.87501C10.5 10.538 10.2366 11.1739 9.76777 11.6428C9.29893 12.1116 8.66305 12.375 8.00001 12.375Z"
+                fill="#737373"
+              />
+            </svg>
+            Your changes have been successfully saved!
+          </p>
+        );
         setSaving(false);
       };
     }
@@ -188,7 +204,7 @@ const Profile = () => {
 
   return (
     <div className="font-default sm:p-[16px] p-0 flex flex-col g-0 sm:gap-[24px] h-full">
-      <DashboardHeader type={"profile"} />
+      <DashboardHeader type={"profile"} email={user?.email} />
 
       <div className="flex flex-row gap-10 sm:p-0 p-[24px]">
         <div className="lg:flex hidden h-[850px] w-[40%] bg-white-default rounded-[12px] p-[40px] relative mb-[16px] justify-center items-center">
@@ -225,7 +241,9 @@ const Profile = () => {
             {links.length &&
               links.map((link: LinkProps, index: number) => {
                 return (
-                  <button
+                  <a
+                    href={link.link}
+                    target="_blank"
                     key={index}
                     className={`${
                       link.name.toLowerCase() === "github"
@@ -249,7 +267,7 @@ const Profile = () => {
                       <span className="capitalize">{link.name}</span>
                     </span>
                     <ArrowRight size={18} />
-                  </button>
+                  </a>
                 );
               })}
           </div>

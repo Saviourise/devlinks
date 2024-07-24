@@ -11,7 +11,13 @@ export default function ToastProvider({ children }: ToastProviderProps) {
   return (
     <>
       {children}
-      <Toaster richColors position="top-right" expand />
+      <Toaster
+        position="bottom-center"
+        expand
+        toastOptions={{
+          style: { background: "#333333", color: "#FAFAFA" },
+        }}
+      />
     </>
   );
 }

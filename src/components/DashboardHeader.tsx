@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const DashboardHeader = ({ type }: { type: string }) => {
+const DashboardHeader = ({ type, email }: { type: string; email: string }) => {
   return (
     <div className="bg-white-default w-full p-[16px] flex flex-row rounded-[8px] items-center justify-between">
       <div className="flex flex-row items-center gap-2">
@@ -39,12 +39,15 @@ const DashboardHeader = ({ type }: { type: string }) => {
         </Link>
       </div>
 
-      <button className="py-[11px] sm:px-[27px] px-[16px] border-[1px] h-[46px] hover:bg-primary-disabled transition-all duration-300 border-primary-default rounded-[8px] text-primary-default bg-white-default text-[16px]">
+      <Link
+        href={`/preview/${email}`}
+        className="py-[11px] sm:px-[27px] px-[16px] border-[1px] h-[46px] hover:bg-primary-disabled transition-all duration-300 border-primary-default rounded-[8px] text-primary-default bg-white-default text-[16px]"
+      >
         <span className="hidden sm:block">Preview</span>
         <span className="sm:hidden block">
           <Eye size={18} />
         </span>
-      </button>
+      </Link>
     </div>
   );
 };
