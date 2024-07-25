@@ -92,7 +92,35 @@ const Links = () => {
       url.includes("http://") ||
       url.includes("www.")
     ) {
-      return;
+      if (
+        !url
+          .toLowerCase()
+          .includes(selectedLink.name.toLowerCase().split(" ")[0])
+      ) {
+        const links = JSON.parse(sessionStorage.getItem("links") as string);
+        const link = links.find(
+          (link: LinkProps) => link.name === selectedLink.name
+        );
+        link.error = "Please check the URL";
+
+        links[index] = link;
+        sessionStorage.setItem("links", JSON.stringify(links));
+        dispatchEvent(new Event("storage"));
+
+        return "Please check the URL";
+      }
+
+      const links = JSON.parse(sessionStorage.getItem("links") as string);
+      const link = links.find(
+        (link: LinkProps) => link.name === selectedLink.name
+      );
+      link.error = false;
+
+      links[index] = link;
+      sessionStorage.setItem("links", JSON.stringify(links));
+      dispatchEvent(new Event("storage"));
+
+      return false;
     } else {
       const links = JSON.parse(sessionStorage.getItem("links") as string);
       const link = links.find(
